@@ -13,7 +13,7 @@
   * [UPM](#upm)
   * [Unity Package](#unity-package)
 * [requirements](#requirements)
-* [using library](#using-library)
+* [using library for Sample](#using-library-for-sample)
 * [License](#license)
 <!-- TOC -->
 
