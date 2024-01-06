@@ -1,0 +1,14 @@
+﻿{
+  "name": "jp.ayutaz.uni-llama-voice-chat" ,
+  "displayName": "uni-llama-voice-chat",
+  "version": "0.1.0" ,
+  "unity": "2023.2" ,
+  "description": "Voice chat for Unity using Llama.cpp and StyleBertVITS2" ,
+  "keywords": [
+    "llama.cpp",
+    "StyleBertVITS2",
+    "BertVITS2"
+  ] ,
+  "license": "Apache License 2.0" ,
+  "licensesUrl": "https://github.com/ayutaz/uni-llama-voice-chat/blob/main/LICENSE"
+}
