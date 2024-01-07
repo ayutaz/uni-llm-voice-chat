@@ -61,7 +61,7 @@ makeを実行するためには、プラットフォームごとに異なる手�
 1. パッケージマネージャーを開く
 2. 左上にある`+`ボタンをクリックする
 3. 「`git URLからパッケージを追加...`」を選択します。
-4. https://github.com/ayutaz/ayutaz/uni-llama-voice-chat.git?path=Assets/UniLlamaVoiceChat/Scripts` のURLを追加する。
+4. `https://github.com/ayutaz/uni-llama-voice-chat.git?path=Assets/UniLlamaVoiceChat/Scripts` のURLを追加する。
 5. `Add`をクリックします。
 
 ## Unity Package
