@@ -25,6 +25,7 @@ jobs:
           projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: 2023.2.4f1
+          customParameters: -testMode EditMode
       # テストの実行結果をアーティファクトにアップロードして後から参照可能にする
       - uses: actions/upload-artifact@v4.0.0
         if: always()
