@@ -1,0 +1,20 @@
+﻿name: remove-old-artifacts
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  remove-old-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Remove old artifacts
+        uses: c-hive/gha-remove-artifacts@v1.2.0
+        with:
+          age: '1 days'
+          skip-recent: 1
