@@ -1,9 +1,9 @@
 ﻿{
   "name": "jp.ayutaz.uni-llama-voice-chat" ,
   "displayName": "uni-llama-voice-chat",
-  "version": "0.1.0" ,
+  "version": "0.1.1" ,
   "unity": "2023.2" ,
-  "description": "Voice chat for Unity using Llama.cpp and StyleBertVITS2" ,
+  "description": "llama.cpp as an LLM server to perform inference and generate speech using Synthetic voice library" ,
   "keywords": [
     "llama.cpp",
     "StyleBertVITS2",
