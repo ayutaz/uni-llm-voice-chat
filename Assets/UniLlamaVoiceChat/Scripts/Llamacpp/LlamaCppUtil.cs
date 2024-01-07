@@ -46,8 +46,8 @@ namespace UniLlamaVoiceChat.Llamacpp
             }
 
             // レスポンスの表示
-            var calm2Response = JsonUtility.FromJson<LlamaCppResponse>(webRequest.downloadHandler.text);
-            return calm2Response.content;
+            var response = JsonUtility.FromJson<LlamaCppResponse>(webRequest.downloadHandler.text);
+            return response.content;
         }
     }
 }
