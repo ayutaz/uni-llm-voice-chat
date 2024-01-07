@@ -1,0 +1,61 @@
+﻿name: Release
+
+env:
+  TARGET_FILE: ./Assets/UniLlamaVoiceChat/Scripts/package.json
+  FILE_NAME: "UniLlamaVoiceChat"
+  BUILD_METHOD: "PackageExporter.Export"
+
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - .
+        unityVersion:
+          - 2023.2.4f1
+        targetPlatform:
+          - WebGL
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+      - name: Build package
+        id: build
+        uses: game-ci/unity-builder@v4.1.3
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          buildName: ${{ env.FILE_NAME }}.unitypackage
+          buildMethod: ${{ env.BUILD_METHOD }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildPath: src/Unity
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          draft: true
+          generate_release_notes: true
+          name: ${{ github.event.pull_request.body }}
+          tag_name: ${{ github.event.pull_request.title }}
+          prerelease: false
+          files: |
+            build/${{ env.FILE_NAME }}.unitypackage
