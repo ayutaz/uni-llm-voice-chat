@@ -1,0 +1,31 @@
+name: Test
+
+# Controls when the action will run. 
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    name: Run EditMode and PlayMode Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out my unity project.
+        uses: actions/checkout@v4.1.1
+      - name: Run EditMode and PlayMode Test
+        uses: game-ci/unity-test-runner@v4.1.1
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: .
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2023.2.4f1
+      # テストの実行結果をアーティファクトにアップロードして後から参照可能にする
+      - uses: actions/upload-artifact@v4.0.0
+        if: always()
+        with:
+          name: Test results
+          path: artifacts
