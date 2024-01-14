@@ -1,4 +1,4 @@
-﻿namespace UniLlamaVoiceChat.Llamacpp
+﻿namespace UniLLMVoiceChat.Llamacpp
 {
     /// <summary>
     /// llama.cppのサーバーへのリクエストクラス

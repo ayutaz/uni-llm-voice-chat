@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using UniLlamaVoiceChat.Util;
+using UniLLMVoiceChat.Util;
 
 namespace Tests
 {

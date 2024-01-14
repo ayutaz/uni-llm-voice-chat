@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using UniLlamaVoiceChat.Llamacpp;
-using UniLlamaVoiceChat.StyleBertVITS2;
-using UniLlamaVoiceChat.Util;
+using UniLLMVoiceChat.Llamacpp;
+using UniLLMVoiceChat.StyleBertVITS2;
+using UniLLMVoiceChat.Util;
 using UnityEngine;
 
-namespace UniLlamaVoiceChat.Sample
+namespace UniLLMVoiceChat.Sample
 {
     /// <summary>
     /// ユーザーがテキストで入力したチャットをキャラクター側が音声で反応するクラス

@@ -1,6 +1,11 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "2.5.0",
+    "com.mochineko.voice-activity-detection": "https://github.com/mochi-neko/voice-activity-detection-unity.git?path=/Assets/Mochineko/VoiceActivityDetection#0.4.2",
+    "com.naudio.core": "https://github.com/mochi-neko/simple-audio-codec-unity.git?path=/Assets/NAudio/NAudio.Core#0.2.0",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+    "com.mochineko.relent": "https://github.com/mochi-neko/Relent.git?path=/Assets/Mochineko/Relent#0.2.0",
+    "com.mochineko.whisper-api": "https://github.com/mochi-neko/Whisper-API-unity.git?path=/Assets/Mochineko/WhisperAPI#1.0.0",
     "com.unity.ai.navigation": "2.0.0",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.ide.rider": "3.0.27",

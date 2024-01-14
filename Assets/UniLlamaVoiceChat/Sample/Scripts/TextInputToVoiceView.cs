@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UniLlamaVoiceChat.Sample
+namespace UniLLMVoiceChat.Sample
 {
     /// <summary>
     /// TextChatToVoiceのViewクラス
