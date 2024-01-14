@@ -7,7 +7,7 @@ namespace UniLlamaVoiceChat.Sample
     /// <summary>
     /// TextChatToVoiceのViewクラス
     /// </summary>
-    public class TextChatToVoiceView : MonoBehaviour
+    public class TextInputToVoiceView : MonoBehaviour
     {
         /// <summary>
         /// チャットの入力フィールド
