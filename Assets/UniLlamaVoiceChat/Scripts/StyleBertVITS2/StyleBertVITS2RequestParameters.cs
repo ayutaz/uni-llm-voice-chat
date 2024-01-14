@@ -1,4 +1,4 @@
-﻿namespace UniLlamaVoiceChat.StyleBertVITS2
+﻿namespace UniLLMVoiceChat.StyleBertVITS2
 {
     /// <summary>
     /// テキストを音声に変換する際のパラメーター

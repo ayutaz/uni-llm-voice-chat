@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UniLlamaVoiceChat.Llamacpp
+namespace UniLLMVoiceChat.Llamacpp
 {
     /// <summary>
     /// llama.cppのサーバーからのレスポンス

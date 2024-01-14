@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UniLlamaVoiceChat.Util
+namespace UniLLMVoiceChat.Util
 {
     /// <summary>
     /// WAVデータをAudioClipに変換するクラス

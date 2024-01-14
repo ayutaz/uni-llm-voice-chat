@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace UniLlamaVoiceChat.StyleBertVITS2
+namespace UniLLMVoiceChat.StyleBertVITS2
 {
     /// <summary>
     /// StyleBertVITS2モデルを使用する際のユーティリティクラス

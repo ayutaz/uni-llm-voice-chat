@@ -2,12 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UniLlamaVoiceChat.Sample
+namespace UniLLMVoiceChat.Sample
 {
     /// <summary>
     /// TextChatToVoiceのViewクラス
     /// </summary>
-    public class TextChatToVoiceView : MonoBehaviour
+    public class TextInputToVoiceView : MonoBehaviour
     {
         /// <summary>
         /// チャットの入力フィールド

@@ -1,15 +1,15 @@
 ﻿using System.Threading;
-using UniLlamaVoiceChat.Llamacpp;
-using UniLlamaVoiceChat.StyleBertVITS2;
-using UniLlamaVoiceChat.Util;
+using UniLLMVoiceChat.Llamacpp;
+using UniLLMVoiceChat.StyleBertVITS2;
+using UniLLMVoiceChat.Util;
 using UnityEngine;
 
-namespace UniLlamaVoiceChat.Sample
+namespace UniLLMVoiceChat.Sample
 {
     /// <summary>
     /// ユーザーがテキストで入力したチャットをキャラクター側が音声で反応するクラス
     /// </summary>
-    public class TextChatToVoicePresenter : MonoBehaviour
+    public class TextInputToVoicePresenter : MonoBehaviour
     {
         /// <summary>
         /// audioSource
@@ -19,7 +19,7 @@ namespace UniLlamaVoiceChat.Sample
         /// <summary>
         /// 画面
         /// </summary>
-        [SerializeField] private TextChatToVoiceView _textChatToVoiceView;
+        [SerializeField] private TextInputToVoiceView textInputToVoiceView;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -30,28 +30,28 @@ namespace UniLlamaVoiceChat.Sample
 
         private void Start()
         {
-            _textChatToVoiceView.OnClickSendButton
+            textInputToVoiceView.OnClickSendButton
                 .onClick.AddListener(async () =>
                 {
-                    if (string.IsNullOrEmpty(_textChatToVoiceView.InputMessage))
+                    if (string.IsNullOrEmpty(textInputToVoiceView.InputMessage))
                     {
                         return;
                     }
                     
-                    _textChatToVoiceView.AddChatText(_textChatToVoiceView.InputMessage);
+                    textInputToVoiceView.AddChatText(textInputToVoiceView.InputMessage);
                     
                     // llama.cppサーバーに対するリクエストパラメーターを作成する
                     var requestParam = new LlamaCppRequest
                     {
-                        prompt = _textChatToVoiceView.InputMessage,
+                        prompt = textInputToVoiceView.InputMessage,
                         temperature = 0.8f,
                         n_predict = 10,
-                        stream = false,
+                        stream = true,
                     };
                     var chatResponse = await LlamaCppUtil.PostRequest(requestParam,
                         _cancellationTokenSource.Token);
-                    _textChatToVoiceView.ClearInputMessage();
-                    _textChatToVoiceView.AddChatText(chatResponse);
+                    textInputToVoiceView.ClearInputMessage();
+                    textInputToVoiceView.AddChatText(chatResponse);
                     
                     // 返信テキストから音声を生成する
                     var param = new StyleBertVITS2RequestParameters
