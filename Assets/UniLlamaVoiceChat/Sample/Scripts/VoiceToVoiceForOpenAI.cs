@@ -5,21 +5,32 @@ using System.Net.Http;
 using System.Threading;
 using Assets.Mochineko.WhisperAPI;
 using Cysharp.Threading.Tasks;
+using Mochineko.ChatGPT_API;
+using Mochineko.ChatGPT_API.Memory;
 using Mochineko.Relent.Resilience;
 using Mochineko.Relent.UncertainResult;
 using Mochineko.VoiceActivityDetection;
-using UniLLMVoiceChat.Llamacpp;
 using UniLLMVoiceChat.StyleBertVITS2;
 using UniLLMVoiceChat.Util;
 using UnityEngine;
 
 namespace UniLLMVoiceChat.Sample
 {
-    /// <summary>
-    /// VoiceInputToVoiceResponsePresenter
-    /// </summary>
-    public class VoiceInputToVoiceResponsePresenter : MonoBehaviour, IWaveStreamReceiver
+    public class VoiceToVoiceForOpenAI : MonoBehaviour, IWaveStreamReceiver
     {
+        /// <summary>
+        /// System message to instruct assistant.
+        /// </summary>
+        [SerializeField, TextArea] private string systemMessage = string.Empty;
+
+        /// <summary>
+        /// Max number of chat memory of queue.
+        /// </summary>
+        [SerializeField] private int maxMemoryCount = 20;
+
+        private ChatCompletionAPIConnection? connection;
+        private IChatMemory? memory;
+
         [SerializeField] private VADParameters parameters;
 
         [SerializeField] private AudioSource audioSource;
@@ -39,7 +50,7 @@ namespace UniLLMVoiceChat.Sample
 
         private readonly TranscriptionRequestParameters requestParameters = new(
             file: "UnityMicVAD.wav",
-            model: Model.Whisper1,
+            model: Assets.Mochineko.WhisperAPI.Model.Whisper1,
             language: "ja");
 
         private static readonly HttpClient httpClient = new();
@@ -51,6 +62,18 @@ namespace UniLLMVoiceChat.Sample
 
         private void Start()
         {
+            // StyleBertVITS2のサーバーURLを書き換える
+            StyleBertVITS2Util.StyleBertVITSBaseURL = Constant.voiceServiceURL;
+            
+            memory = new FiniteQueueChatMemory(maxMemoryCount);
+
+            // Create instance of ChatGPTConnection with specifying chat model.
+            connection = new ChatCompletionAPIConnection(
+                Constant.openAIKey,
+                memory,
+                systemMessage);
+
+
             if (parameters == null)
             {
                 throw new NullReferenceException(nameof(parameters));
@@ -144,39 +167,19 @@ namespace UniLLMVoiceChat.Sample
                     {
                         // FIXME: Log.Debug is not working at this.
                         Debug.LogFormat("[VAD.Samples] Succeeded to transcribe into: {0}.", text);
-                        _voiceResponseView.AddChatText(text);
-
-                        const string instruction = "以下について回答してください";
-                        var prompt = 
-                            "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n" +
-                            "### 指示:\n" +
-                            instruction + "\n\n" +
-                            "### 入力:\n" +
-                            text + "\n\n" +
-                            "### 応答:\n";
-
-
-                        // llama.cppサーバーに対するリクエストパラメーターを作成する
-                        var requestParam = new LlamaCppRequest
-                        {
-                            prompt = prompt,
-                            temperature = 0.8f,
-                            n_predict = 30,
-                        };
-                        var chatResponse = await LlamaCppUtil.PostRequest(requestParam,
-                            _cancellationTokenSource.Token);
-                        _voiceResponseView.AddChatText(chatResponse);
+                        var chatResponse = await SendChatAsync(text,cancellationToken: cancellationToken);
 
                         if (100 <= chatResponse.Length)
                         {
-                            Debug.LogError("LLMによる推論の長さが100文字を超えています。");
-                            return;
+                            Debug.LogError("LLMによる推論の長さが100文字を超えています。文字数を強制的に99文字にします。");
+                            chatResponse = chatResponse[..99];
                         }
 
                         // 返信テキストから音声を生成する
                         var param = new StyleBertVITS2RequestParameters
                         {
-                            Text = chatResponse
+                            Text = chatResponse,
+                            ModelId = 1
                         };
                         var audioResponse =
                             await StyleBertVITS2Util.TextToSpeechAsync(param, _cancellationTokenSource.Token);
@@ -215,6 +218,45 @@ namespace UniLLMVoiceChat.Sample
         {
             vad?.Dispose();
             proxy?.Dispose();
+        }
+
+        private async UniTask<string> SendChatAsync(string message,CancellationToken cancellationToken)
+        {
+            // Validations
+            if (connection == null)
+            {
+                Debug.LogError($"[ChatGPT_API.Samples] Connection is null.");
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(message))
+            {
+                Debug.LogError($"[ChatGPT_API.Samples] Chat content is empty.");
+                return null;
+            }
+
+            ChatCompletionResponseBody response;
+            try
+            {
+                await UniTask.SwitchToThreadPool();
+
+                // Create message by ChatGPT chat completion API.
+                response = await connection.CompleteChatAsync(
+                    message,
+                    cancellationToken);
+            }
+            catch (Exception e)
+            {
+                // Exceptions should be caught.
+                Debug.LogException(e);
+                return null;
+            }
+
+            await UniTask.SwitchToMainThread(cancellationToken);
+
+            // Log chat completion result.
+            Debug.Log($"[ChatGPT_API.Samples] Result:\n{response.ResultMessage}");
+            return response.ResultMessage;
         }
     }
 }

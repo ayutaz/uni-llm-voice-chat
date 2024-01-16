@@ -14,7 +14,7 @@ namespace UniLLMVoiceChat.StyleBertVITS2
         /// <summary>
         /// StyleBertVITS2のサーバーURL
         /// </summary>
-        private const string StyleBertVITSBaseURL = "http://127.0.0.1:5000/";
+        public static string StyleBertVITSBaseURL = "http://127.0.0.1:5000/";
 
         /// <summary>
         /// テキストを音声に変換する
