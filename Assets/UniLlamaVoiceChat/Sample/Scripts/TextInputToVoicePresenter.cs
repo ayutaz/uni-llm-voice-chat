@@ -40,14 +40,23 @@ namespace UniLLMVoiceChat.Sample
                     
                     textInputToVoiceView.AddChatText(textInputToVoiceView.InputMessage);
                     
+                    const string instruction = "以下について回答してください";
+                    var prompt = 
+                        "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n" +
+                        "### 指示:\n" +
+                        instruction + "\n\n" +
+                        "### 入力:\n" +
+                        textInputToVoiceView.InputMessage + "\n\n" +
+                        "### 応答:\n";
+                    
                     // llama.cppサーバーに対するリクエストパラメーターを作成する
                     var requestParam = new LlamaCppRequest
                     {
-                        prompt = textInputToVoiceView.InputMessage,
+                        prompt = prompt,
                         temperature = 0.8f,
-                        n_predict = 10,
-                        stream = true,
+                        n_predict =30,
                     };
+                    
                     var chatResponse = await LlamaCppUtil.PostRequest(requestParam,
                         _cancellationTokenSource.Token);
                     textInputToVoiceView.ClearInputMessage();

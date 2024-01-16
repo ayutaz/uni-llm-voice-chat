@@ -17,6 +17,15 @@
       },
       "hash": "aa14664642f2fc99625ceea5e03744a33411e636"
     },
+    "com.mochineko.chatgpt-api": {
+      "version": "https://github.com/mochi-neko/ChatGPT-API-unity.git?path=/Assets/Mochineko/ChatGPT_API#0.7.3",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "a594cb6c4d8d9d83b213af7ce7d8d76a14c4859b"
+    },
     "com.mochineko.relent": {
       "version": "https://github.com/mochi-neko/Relent.git?path=/Assets/Mochineko/Relent#0.2.0",
       "depth": 0,
