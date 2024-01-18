@@ -110,7 +110,7 @@ namespace UniLLMVoiceChat.Sample
         private async UniTask TranscribeAsync(Stream stream, CancellationToken cancellationToken)
         {
             // API key must be set in environment variable.
-            var apiKey = Constant.openAIKey;
+            var apiKey = "YOUR_OPEN_API_KEY";
             if (string.IsNullOrEmpty(apiKey))
             {
                 throw new NullReferenceException(nameof(apiKey));

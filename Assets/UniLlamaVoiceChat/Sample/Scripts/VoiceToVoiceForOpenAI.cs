@@ -63,13 +63,13 @@ namespace UniLLMVoiceChat.Sample
         private void Start()
         {
             // StyleBertVITS2のサーバーURLを書き換える
-            StyleBertVITS2Util.StyleBertVITSBaseURL = Constant.voiceServiceURL;
+            StyleBertVITS2Util.StyleBertVITSBaseURL = "VOICE_SERVICE_URL";
             
             memory = new FiniteQueueChatMemory(maxMemoryCount);
 
             // Create instance of ChatGPTConnection with specifying chat model.
             connection = new ChatCompletionAPIConnection(
-                Constant.openAIKey,
+                "YOUR_OPENAI_API_KEY",
                 memory,
                 systemMessage);
 
@@ -133,7 +133,7 @@ namespace UniLLMVoiceChat.Sample
         private async UniTask TranscribeAsync(Stream stream, CancellationToken cancellationToken)
         {
             // API key must be set in environment variable.
-            var apiKey = Constant.openAIKey;
+            var apiKey = "YOUR OPEN API KEY";
             if (string.IsNullOrEmpty(apiKey))
             {
                 throw new NullReferenceException(nameof(apiKey));
