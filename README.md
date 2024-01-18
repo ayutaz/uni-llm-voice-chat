@@ -1,15 +1,20 @@
 # キャラクターとの音声対話プロジェクト
-[llama.cpp](https://github.com/ggerganov/llama.cpp)をLLMサーバーとして推論を行います。また推論内容から音声合成ライブラリ(*1)を用いて音声を生成するライブラリです。   
+LLM(*1)をサーバーとして推論を行います。また推論内容から音声合成ライブラリ(*2)を用いて音声を生成するライブラリです。   
 サンプルシーンもあるため、cloneしてそのまま実行することができます。   
 またライブラリとしてもご活用いただけます。
 
-(*1) 対応している音声合成ライブラリ
+(*1) 対応しているLLM
+- [x] [llama.cpp](https://github.com/ggerganov/llama.cpp)
+- [x] [OpenAI](https://openai.com/)
+
+(*2) 対応している音声合成ライブラリ
 - [x] [Style-Bert-VITS2](https://github.com/litagin02/Style-Bert-VITS2)
 - [ ] [Bert-VITS2](https://github.com/fishaudio/Bert-VITS2)
 - [ ] [fish-speech](https://github.com/fishaudio/fish-speech)
 - [ ] [Koemotion](https://rinna.co.jp/products/business/koemotion/)
 - [ ] [VOICEVOX](https://voicevox.hiroshiba.jp/)
 - [ ] [COEIROINK](https://coeiroink.com/)
+- [ ] [OpenAITTS](https://platform.openai.com/docs/guides/text-to-speech)
 
 
 <!-- TOC -->
@@ -29,11 +34,11 @@
 # usage
 ## llama.cppのセットアップ
 1. [llama.cpp](https://github.com/ggerganov/llama.cpp)をcloneします。
-2. `llama.cpp`のディレクトリに移動し、`make`(*2)を実行します。
+2. `llama.cpp`のディレクトリに移動し、`make`(*3)を実行します。
 3. `models`にモデルを配置します。
 4. `llama.cpp`のディレクトリに移動し、`./server.exe -m models/{model_name}`を実行します。llama.cppのサーバーAPIの詳細は[llama.cpp/example/server](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/README.md)を参照してください。
 
-(*2)
+(*3)
 makeを実行するためには、プラットフォームごとに異なる手順が必要です。
 
 * Linux or MacOS
@@ -74,6 +79,7 @@ makeを実行するためには、プラットフォームごとに異なる手�
 
 # using library for Sample
 * [UniTask](https://github.com/Cysharp/UniTask)
+* [voice-activity-detection-unity](https://github.com/mochi-neko/voice-activity-detection-unity)
 * Font: [Noto Sans Japanese](https://fonts.google.com/noto/specimen/Noto+Sans+JP?subset=japanese&noto.script=Hira)
 
 # License

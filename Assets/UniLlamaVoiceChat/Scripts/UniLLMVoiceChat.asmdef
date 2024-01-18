@@ -1,6 +1,6 @@
 {
-    "name": "UniLlamaVoiceChat",
-    "rootNamespace": "UniLlamaVoiceChat",
+    "name": "UniLLMVoiceChat",
+    "rootNamespace": "UniLLMVoiceChat",
     "references": [
         "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],

@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace UniLlamaVoiceChat.Llamacpp
+namespace UniLLMVoiceChat.Llamacpp
 {
     /// <summary>
     /// calm2-chatモデルを使用したチャット機能

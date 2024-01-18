@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UniLlamaVoiceChat/Sample/Scenes/Sample.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/UniLlamaVoiceChat/Sample/Scenes/VoiceInputToVoiceResponseForModelSample.unity
+    guid: b32c0644c72a16848b74e770e5b3cc5b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
