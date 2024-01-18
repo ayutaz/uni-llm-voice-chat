@@ -1,7 +1,7 @@
 ﻿{
   "name": "jp.ayutaz.uni-llm-voice-chat" ,
   "displayName": "uni-llm-voice-chat",
-  "version": "0.1.3" ,
+  "version": "0.2.0" ,
   "unity": "2023.2" ,
   "description": "LLM server to perform inference and generate speech using Synthetic voice library" ,
   "keywords": [

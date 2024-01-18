@@ -4,9 +4,8 @@ LLM(*1)をサーバーとして推論を行います。また推論内容から�
 またライブラリとしてもご活用いただけます。
 
 (*1) 対応しているLLM
-- [x] [llama.cpp]()
-- [ ] [vLLM]()
-- [ ] [OpenAI]()
+- [x] [llama.cpp](https://github.com/ggerganov/llama.cpp)
+- [x] [OpenAI](https://openai.com/)
 
 (*2) 対応している音声合成ライブラリ
 - [x] [Style-Bert-VITS2](https://github.com/litagin02/Style-Bert-VITS2)
@@ -15,6 +14,7 @@ LLM(*1)をサーバーとして推論を行います。また推論内容から�
 - [ ] [Koemotion](https://rinna.co.jp/products/business/koemotion/)
 - [ ] [VOICEVOX](https://voicevox.hiroshiba.jp/)
 - [ ] [COEIROINK](https://coeiroink.com/)
+- [ ] [OpenAITTS](https://platform.openai.com/docs/guides/text-to-speech)
 
 
 <!-- TOC -->
