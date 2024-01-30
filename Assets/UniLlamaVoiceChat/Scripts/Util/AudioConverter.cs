@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace UniLLMVoiceChat.Util
@@ -124,6 +125,50 @@ namespace UniLLMVoiceChat.Util
             }
 
             return true;
+        }
+        
+        /// <summary>
+        /// AudioClipをWAVのbyte[]に変換する
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <returns></returns>
+        public static byte[] ToWav(this AudioClip audioClip)
+        {
+            // AudioClipからデータを取得
+            var samples = new float[audioClip.samples * audioClip.channels];
+            audioClip.GetData(samples, 0);
+
+            // WAVファイルのバイト配列を作成
+            using var memoryStream = new MemoryStream();
+            using var writer = new BinaryWriter(memoryStream);
+            // WAVヘッダーの書き込み
+            WriteWavHeader(writer, audioClip, samples.Length);
+
+            // サンプルデータの書き込み
+            foreach (var sample in samples)
+            {
+                var intValue = (short)(sample * short.MaxValue);
+                writer.Write(intValue);
+            }
+
+            return memoryStream.ToArray();
+        }
+
+        private static void WriteWavHeader(BinaryWriter writer, AudioClip clip, int sampleCount)
+        {
+            writer.Write(System.Text.Encoding.UTF8.GetBytes("RIFF")); // ChunkID
+            writer.Write(36 + sampleCount * 2); // ChunkSize
+            writer.Write(System.Text.Encoding.UTF8.GetBytes("WAVE")); // Format
+            writer.Write(System.Text.Encoding.UTF8.GetBytes("fmt ")); // Subchunk1ID
+            writer.Write(16); // Subchunk1Size
+            writer.Write((short)1); // AudioFormat
+            writer.Write((short)clip.channels); // NumChannels
+            writer.Write(clip.frequency); // SampleRate
+            writer.Write(clip.frequency * clip.channels * 2); // ByteRate
+            writer.Write((short)(clip.channels * 2)); // BlockAlign
+            writer.Write((short)16); // BitsPerSample
+            writer.Write(System.Text.Encoding.UTF8.GetBytes("data")); // Subchunk2ID
+            writer.Write(sampleCount * 2); // Subchunk2Size
         }
     }
 }
