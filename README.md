@@ -114,7 +114,7 @@ makeを実行するためには、プラットフォームごとに異なる手�
 
 # requirements
 
-* Unity 2023.2.4f1
+* Unity 2023.2.12f1
 * [UniTask](https://github.com/Cysharp/UniTask)
 
 # using library for Sample
