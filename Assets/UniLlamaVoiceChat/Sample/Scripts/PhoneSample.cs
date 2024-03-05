@@ -31,13 +31,14 @@ namespace UniLLMVoiceChat.Sample
 
         private CancellationTokenSource _cancellationTokenSource;
 
-        // APIエンドポイントのURLを設定
-        private const string URL = "http://127.0.0.1:8000/transcribe";
+        // STTのAPIエンドポイントのURLを設定
+        private const string STT_URL = "http://127.0.0.1:8000/transcribe";
 
         private void Awake()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            StyleBertVITS2Util.StyleBertVITSBaseURL = "https://4e94-203-137-131-72.ngrok-free.app/";
+            StyleBertVITS2Util.StyleBertVITSBaseURL = "your style-bert-vits2 server url";
+            LlamaCppUtil.LlamaServerURL = "your llama.cpp server url";
         }
 
         private void Start()
@@ -107,7 +108,7 @@ namespace UniLLMVoiceChat.Sample
             };
 
             // UnityWebRequest を初期化し、POSTリクエストを設定
-            using var request = UnityWebRequest.Post(URL, formData);
+            using var request = UnityWebRequest.Post(STT_URL, formData);
             request.downloadHandler = new DownloadHandlerBuffer();
 
             try

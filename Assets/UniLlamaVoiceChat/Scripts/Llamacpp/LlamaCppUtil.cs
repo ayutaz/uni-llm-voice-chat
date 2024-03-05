@@ -13,7 +13,7 @@ namespace UniLLMVoiceChat.Llamacpp
         /// <summary>
         /// llama.cppのサーバーURL
         /// </summary>
-        private const string LlamaServerURL = "http://127.0.0.1:8080/completion";
+        public static string LlamaServerURL = "http://127.0.0.1:8080/completion";
 
         /// <summary>
         /// チャットを送信する
